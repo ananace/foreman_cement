@@ -6,13 +6,13 @@ require 'sentry-sidekiq'
 
 Sentry.init do |config|
   config.logger = Foreman::Logging.logger('foreman_cement')
-  config.dsn = SETTINGS['sentry_dsn']
+  config.dsn = SETTINGS.with_indifferent_access['sentry_dsn']
   config.release = SETTINGS[:version].version
   config.breadcrumbs_logger = %i[active_support_logger http_logger]
 
-  if SETTINGS['sentry_trace']
-    config.traces_sample_rate = if SETTINGS['sentry_trace'].is_a?(Hash)
-                                  SETTINGS.dig('sentry_trace', 'rate') || 0.2
+  if SETTINGS.with_indifferent_access['sentry_trace']
+    config.traces_sample_rate = if SETTINGS.with_indifferent_access['sentry_trace'].is_a?(Hash)
+                                  SETTINGS.with_indifferent_access.dig('sentry_trace', 'rate') || 0.2
                                 else
                                   0.2
                                 end
