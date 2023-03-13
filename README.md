@@ -20,7 +20,7 @@ sentry_dsn: https://abcdef0123456789@sentry.example.com/1
 
 ## Contributing
 
-Bug reports and pull requests are welcome on the LiU GitLab at https://gitlab.liu.se/ITI/foreman_uuid_boot or on GitHub at https://github.com/ananace/foreman_uuid_boot
+Bug reports and pull requests are welcome on the LiU GitLab at https://gitlab.liu.se/ITI/foreman_cement or on GitHub at https://github.com/ananace/foreman_cement
 
 ## License
 
