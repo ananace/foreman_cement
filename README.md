@@ -8,6 +8,16 @@ Based on [foreman_concrete](https://github.com/timogoebel/foreman_concrete/).
 
 See the [Plugins install instructions, advanced installation from gems](https://theforeman.org/plugins/#2.3AdvancedInstallationfromGems) for information on how to install this plugins.
 
+Configuration is done by placing a yaml file in the foreman plugin settings folder, e.g.
+```console
+# cat /etc/foreman/plugins/foreman_cement.yaml
+---
+sentry_dsn: https://abcdef0123456789@sentry.example.com/1
+# sentry_trace: true # Traces 20% of all requests
+# sentry_trace:
+#   rate: 1.0 # Traces 100% of all requests
+```
+
 ## Contributing
 
 Bug reports and pull requests are welcome on the LiU GitLab at https://gitlab.liu.se/ITI/foreman_uuid_boot or on GitHub at https://github.com/ananace/foreman_uuid_boot
