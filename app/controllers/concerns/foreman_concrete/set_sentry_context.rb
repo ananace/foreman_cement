@@ -12,7 +12,7 @@ module ForemanCement
 
     def set_sentry_context
       Sentry.set_user(
-        id: User.current&.id ,
+        id: User.current&.id,
         username: User.current&.login,
         email: User.current&.mail
       )

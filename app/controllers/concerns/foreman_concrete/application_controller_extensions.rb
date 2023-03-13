@@ -24,7 +24,7 @@ module ForemanCement
 
     included do
       prepend Overrides
-      include ForemanCement::SetRavenContext
+      include ForemanCement::SetSentryContext
     end
   end
 end
