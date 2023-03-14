@@ -7,7 +7,7 @@ module ForemanCement
         extend ActiveSupport::Concern
 
         module Overrides
-          def exception(context_message, exception, **options)
+          def exception(context_message, exception, options = {})
             super
 
             sentry_context = {

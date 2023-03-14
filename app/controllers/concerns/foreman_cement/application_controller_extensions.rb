@@ -10,7 +10,7 @@ module ForemanCement
           if User.current&.admin? && exception.try(:cause).is_a?(ActiveRecord::SubclassNotFound)
 
         ex_message = exception.message
-        Foreman::Logging.exception("[Reported to Sentry as #{Sentry.last_event_id}] #{ex_message}", exception)
+        Foreman::Logging.exception("[Reported to Sentry] #{ex_message}", exception)
 
         render template: 'foreman_cement/500',
                layout: !request.xhr?,
