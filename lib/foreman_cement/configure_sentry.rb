@@ -11,11 +11,32 @@ Sentry.init do |config|
   config.breadcrumbs_logger = %i[active_support_logger http_logger]
 
   if SETTINGS.with_indifferent_access['sentry_trace']
-    config.traces_sample_rate = if SETTINGS.with_indifferent_access['sentry_trace'].is_a?(Hash)
-                                  SETTINGS.with_indifferent_access.dig('sentry_trace', 'rate') || 0.2
-                                else
-                                  0.2
-                                end
+    config.traces_sampler = lambda do |ctx|
+      next ctx[:parent_sampled] if ctx[:parent_sampled]
+
+      # if SETTINGS.with_indifferent_access['sentry_trace'].is_a?(Hash)
+      #   SETTINGS.with_indifferent_access.dig('sentry_trace', 'rate') || 0.2
+      # else
+      #   0.2
+      # end
+
+      tctx = ctx[:transaction_context]
+      case tctx[:op]
+      when /http/
+        case tctx[:name]
+        when /api/
+          0.2
+        when /hosts/
+          0.5
+        else
+          0.1
+        end
+      when /sidekiq/
+        0.01
+      else
+        false
+      end
+    end
   end
 
   ## FIXME: Filters out required Sentry data if enabled
