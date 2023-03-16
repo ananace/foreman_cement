@@ -15,7 +15,6 @@ module ForemanCement
                 context_message: context_message
               },
               level: options[:level] || :warn,
-              logger: options[:logger] || 'app'
             }
             Sentry.capture_exception(exception, **sentry_context)
           end
