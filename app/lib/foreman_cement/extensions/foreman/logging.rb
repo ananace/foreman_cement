@@ -14,7 +14,7 @@ module ForemanCement
               extra: {
                 context_message: context_message
               },
-              level: options[:level] || :warn,
+              level: options[:level] || :warn
             }
             Sentry.capture_exception(exception, **sentry_context)
           end
