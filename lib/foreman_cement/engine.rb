@@ -7,9 +7,11 @@ module ForemanCement
     config.autoload_paths += Dir["#{config.root}/app/lib"]
     config.autoload_paths += Dir["#{config.root}/app/controllers/concerns"]
 
-    initializer 'foreman_cement.register_plugin', before: :finisher_hook do |_app|
-      Foreman::Plugin.register :foreman_cement do
-        requires_foreman '>= 3.0'
+    initializer 'foreman_cement.register_plugin', before: :finisher_hook do |app|
+      app.reloader.to_prepare do
+        Foreman::Plugin.register :foreman_cement do
+          requires_foreman '>= 3.12'
+        end
       end
     end
 
