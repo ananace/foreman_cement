@@ -11,6 +11,8 @@ module ForemanCement
       app.reloader.to_prepare do
         Foreman::Plugin.register :foreman_cement do
           requires_foreman '>= 3.12'
+
+          logger :sentry, enabled: true
         end
       end
     end
