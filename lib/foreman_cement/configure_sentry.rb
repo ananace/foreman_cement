@@ -6,7 +6,11 @@ require 'sentry-sidekiq'
 
 # rubocop:disable Metrics/BlockLength
 Sentry.init do |config|
-  config.logger = Foreman::Logging.logger('foreman_cement/sentry')
+  if Rails.const_defined? 'Server'
+    config.logger = Foreman::Logging.logger('foreman_cement/sentry')
+  else
+    config.logger = Foreman::Logging.logger('background')
+  end
   config.dsn = SETTINGS.with_indifferent_access['sentry_dsn']
   config.release = SETTINGS[:version].version
   config.breadcrumbs_logger = %i[active_support_logger http_logger]
