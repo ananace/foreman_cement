@@ -17,12 +17,10 @@ module ForemanCement
       end
     end
 
-    initializer 'foreman_cement.configure_sentry', after: :load_environment_config do
-      require 'foreman_cement/configure_sentry' if SETTINGS.with_indifferent_access['sentry_dsn']
-    end
-
     # Include concerns in this config.to_prepare block
     config.to_prepare do
+      require 'foreman_cement/configure_sentry' if SETTINGS.with_indifferent_access['sentry_dsn']
+
       ::Foreman::Exception.include ForemanCement::Extensions::Foreman::Exception
       ::Foreman::LoggingImpl.include ForemanCement::Extensions::Foreman::Logging
       ::ApplicationController.include ForemanCement::ApplicationControllerExtensions
